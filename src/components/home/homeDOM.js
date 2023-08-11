@@ -1,11 +1,11 @@
-const content = document.querySelector('content');
-const loadHomePage = () => {
+const content = document.querySelector('#content');
+const loadHomepage = () => {
     
     const title = document.createElement('h1');
-    title.textContent = 'Just Do It!'
+    title.textContent = 'Just Do It!';
 
     content.appendChild(title);
 
 }
 
-export default loadHomePage
+export default loadHomepage
