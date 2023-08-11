@@ -1,3 +1,5 @@
+import navLogic from "./navLogic";
+
 const content = document.querySelector('#content');
 
 const loadNav = () => {
@@ -8,9 +10,13 @@ const loadNav = () => {
 
     const home = document.createElement('li');
     home.textContent = 'Home';
+    home.setAttribute('id', 'home');
+    home.classList.add('nav-link')
 
     const projects = document.createElement('li');
     projects.textContent = 'Projects';
+    projects.setAttribute('id', 'projects');
+    projects.classList.add('nav-link')
 
     content.appendChild(header);
 
@@ -21,6 +27,7 @@ const loadNav = () => {
     navList.appendChild(home);
     navList.appendChild(projects)
 
+    navLogic()
 }
 
 export default loadNav
