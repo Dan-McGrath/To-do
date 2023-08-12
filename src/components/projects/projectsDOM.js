@@ -1,3 +1,5 @@
+import createProjectObject  from "./projectsLogic";
+
 const content = document.querySelector('#content');
 const loadProjectsPage = () => {
     
@@ -9,6 +11,8 @@ const loadProjectsPage = () => {
     content.appendChild(project());
 
     content.appendChild(createProject());
+
+    
 
 }
 
@@ -34,6 +38,7 @@ const createProject = () => {
         if (e.target.dataset.active === 'false') {
             e.target.dataset.active = 'true'
             createProjectForm()
+            createProjectObject()
         } else {
             e.target.dataset.active = 'false'
             content.removeChild(content.lastChild)
@@ -94,6 +99,7 @@ const createProjectForm = () => {
     //submit button
     const submit = document.createElement('button');
     submit.textContent = 'Submit';
+    submit.setAttribute('id', 'submit')
     projectForm.appendChild(submit);
 
     return projectFormDiv
