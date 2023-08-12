@@ -5,16 +5,34 @@ const createProjectObject = () => {
 
     submit.addEventListener('click', e => {
         e.preventDefault();
-        project.title = document.querySelector('#title').value
-        project.description = document.querySelector('#description').value
-        projectsArr.push(project)
+        let newTitle = document.querySelector('#title');
+        let newDescription = document.querySelector('#description');
+        let content = document.querySelector('#content');
+        let createProjectButton = document.querySelector('.create-project')
+
+        if (newTitle === '' || newDescription === '') {
+            alert('Please fill out missing info')
+        } else {
+            project.title = newTitle.value
+            project.description = newDescription.value
+            newTitle.value = '';
+            newTitle.textContent = '';
+            newDescription.value = '';
+            newDescription.textContent = '';
+            projectsArr.push(project)
+            createProjectButton.dataset.active = 'false'
+            content.removeChild(content.lastChild)
+        }
+
+        
         console.log(projectsArr)
         
     })
 
     const project = {
         title: title,
-        description: description
+        description: description,
+        toDo: []
     }
 
     const projectsArr = [];
