@@ -20,12 +20,15 @@ const loadProjectsPage = () => {
 }
 
 const project = () => {
-    const projectDiv = document.createElement('div');
-    projectDiv.classList.add('project');
+    
     
 
     // create logic to loop through available projects and display them
     for (let i = 0; i < projectArr.length; i++) {
+        const projectDiv = document.createElement('div');
+        projectDiv.classList.add('project');
+        projectDiv.dataset.index = i;
+
         const projectTitle = projectArr[i].title;
         const projectDescription = projectArr[i].description;
 
@@ -37,8 +40,10 @@ const project = () => {
 
         projectDiv.appendChild(title);
         projectDiv.appendChild(description);
+
+        return projectDiv
     }
-    return projectDiv
+    
 }
 
 
