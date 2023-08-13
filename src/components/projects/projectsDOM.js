@@ -1,4 +1,4 @@
-import createProjectObject  from "./projectsLogic";
+import { submitHandler, projectArr } from "./projectsLogic";
 
 const content = document.querySelector('#content');
 const loadProjectsPage = () => {
@@ -8,7 +8,10 @@ const loadProjectsPage = () => {
     subtitle.textContent = 'Projects';
     content.appendChild(subtitle);
 
-    content.appendChild(project());
+
+    if(projectArr.length > 0) {
+        content.appendChild(project())
+    }
 
     content.appendChild(createProject());
 
@@ -19,9 +22,22 @@ const loadProjectsPage = () => {
 const project = () => {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
+    
 
     // create logic to loop through available projects and display them
+    for (let i = 0; i < projectArr.length; i++) {
+        const projectTitle = projectArr[i].title;
+        const projectDescription = projectArr[i].description;
 
+        const title = document.createElement('h3');
+        const description = document.createElement('p');
+
+        title.textContent = projectTitle;
+        description.textContent = projectDescription
+
+        projectDiv.appendChild(title);
+        projectDiv.appendChild(description);
+    }
     return projectDiv
 }
 
@@ -38,7 +54,7 @@ const createProject = () => {
         if (e.target.dataset.active === 'false') {
             e.target.dataset.active = 'true'
             createProjectForm()
-            createProjectObject()
+
         } else {
             e.target.dataset.active = 'false'
             content.removeChild(content.lastChild)
@@ -101,6 +117,8 @@ const createProjectForm = () => {
     submit.textContent = 'Submit';
     submit.setAttribute('id', 'submit')
     projectForm.appendChild(submit);
+    submit.addEventListener('click', submitHandler)
+    
 
     return projectFormDiv
 }
