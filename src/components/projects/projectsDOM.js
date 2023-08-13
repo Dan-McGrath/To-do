@@ -1,4 +1,5 @@
 import { submitHandler, projectArr } from "./projectsLogic";
+import { todoButtonHandler } from "../to-do/todoLogic";
 
 const content = document.querySelector('#content');
 const loadProjectsPage = () => {
@@ -38,9 +39,16 @@ const project = () => {
         title.textContent = projectTitle;
         description.textContent = projectDescription
 
+        const todoButton = document.createElement('button');
+        todoButton.textContent = 'Add To-Do';
+        todoButton.dataset.index = i;
+        todoButton.dataset.active = 'false';
+
+        todoButton.addEventListener('click', todoButtonHandler)
+
         projectDiv.appendChild(title);
         projectDiv.appendChild(description);
-
+        projectDiv.appendChild(todoButton);
         return projectDiv
     }
     
