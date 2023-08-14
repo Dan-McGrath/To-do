@@ -28,6 +28,7 @@ const project = () => {
 
     // create logic to loop through available projects and display them
     for (let i = 0; i < projectArr.length; i++) {
+
         projectDiv.dataset.index = i;
 
         const projectTitle = projectArr[i].title;
@@ -43,6 +44,7 @@ const project = () => {
         todoButton.textContent = 'Add To-Do';
         todoButton.dataset.index = i;
         todoButton.dataset.active = 'false';
+        todoButton.classList.add('todo-btn')
 
         todoButton.addEventListener('click', todoButtonHandler)
 
