@@ -10,23 +10,25 @@ const submitHandler = (e) => {
     }
 
     e.preventDefault();
-    let newTitle = document.querySelector('#title');
+    let newTitle = document.querySelector('#name');
     let newDescription = document.querySelector('#description');
     let content = document.querySelector('#content');
     let createProjectButton = document.querySelector('.create-project')
 
-    if (newTitle === '' || newDescription === '') {
-        alert('Please fill out missing info')
+    if (newTitle.value === '' || newDescription.value === '') {
+        alert('Please fill out missing info');
     } else {
-        project.title = newTitle.value
-        project.description = newDescription.value
+        project.title = newTitle.value;
+        project.description = newDescription.value;
+        projectArr.push(project);
+        content.removeChild(content.lastChild)
         newTitle.value = '';
         newTitle.textContent = '';
         newDescription.value = '';
         newDescription.textContent = '';
         createProjectButton.dataset.active = 'false'
-        content.removeChild(content.lastChild)
-        projectArr.push(project)
+        
+        
         
         while (content.childNodes.length > 1) {
             content.removeChild(content.lastChild)
