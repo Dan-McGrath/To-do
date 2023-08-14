@@ -7,15 +7,16 @@ const createTodo = () => {
 }
 
 const todoForm = () => {
-    const projectDiv = document.querySelector('.project')
-    const projectID = projectDiv.dataset.index;
+    const projectsDiv = document.querySelector('.projects')
+    const projectID = projectsDiv.dataset.index;
     
     const todoFormDiv = document.createElement('div');
     todoFormDiv.dataset.active = 'false';
     todoFormDiv.classList.add('todo-form');
-    todoFormDiv.dataset.index = projectID
+    todoFormDiv.dataset.index = projectID;
+    
 
-    projectDiv.appendChild(todoFormDiv)
+    projectsDiv.appendChild(todoFormDiv)
 
     const todoForm = document.createElement('form');
     todoForm.setAttribute('action', '#');
