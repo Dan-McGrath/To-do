@@ -8,28 +8,37 @@ const loadProjectsPage = () => {
     const subtitle = document.createElement('h1');
     subtitle.textContent = 'Projects';
     content.appendChild(subtitle);
-
+    
+    const projectsDiv = document.createElement('div');
+    projectsDiv.classList.add('projects');
+    content.appendChild(projectsDiv);
 
     if(projectArr.length > 0) {
-        content.appendChild(project())
+        for (let i = 0; i < projectArr.length; i++){
+            
+            projectsDiv.appendChild(project(i))
+        }
+        
     }
 
     content.appendChild(createProject());
 
-    
+    const todoBtn = document.querySelectorAll('.todo-btn');
+    console.log(todoBtn)
+    todoBtn.forEach(e => e.addEventListener('click', todoButtonHandler))
 
 }
 
-const project = () => {
+const project = (i) => {
     
-    const projectDiv = document.createElement('div');
-    projectDiv.classList.add('project');
+    const indivProjectDiv = document.createElement('div');
     
 
     // create logic to loop through available projects and display them
-    for (let i = 0; i < projectArr.length; i++) {
+    
+        indivProjectDiv.classList.add('project-' + i);
 
-        projectDiv.dataset.index = i;
+        indivProjectDiv.dataset.index = i;
 
         const projectTitle = projectArr[i].title;
         const projectDescription = projectArr[i].description;
@@ -38,7 +47,9 @@ const project = () => {
         const description = document.createElement('p');
 
         title.textContent = projectTitle;
-        description.textContent = projectDescription
+        description.textContent = projectDescription;
+
+        
 
         const todoButton = document.createElement('button');
         todoButton.textContent = 'Add To-Do';
@@ -46,15 +57,33 @@ const project = () => {
         todoButton.dataset.active = 'false';
         todoButton.classList.add('todo-btn')
 
-        todoButton.addEventListener('click', todoButtonHandler)
-
-        projectDiv.appendChild(title);
-        projectDiv.appendChild(description);
-        projectDiv.appendChild(todoButton);
         
-    }
 
-    return projectDiv
+        indivProjectDiv.appendChild(title);
+        indivProjectDiv.appendChild(description);
+        
+        for(let j = 0; j < projectArr[i].toDo.length; j++) {
+            const todoDiv = document.createElement('div')
+            const todoName = projectArr[i].toDo[j].name;
+            const todoPriority = projectArr[i].toDo[j].priority;
+            const todoNameDom = document.createElement('p');
+            const todoPriorityDom = document.createElement('div');
+
+            todoNameDom.textContent = todoName;
+            todoPriorityDom.textContent = todoPriority
+
+            indivProjectDiv.appendChild(todoDiv);
+            todoDiv.appendChild(todoNameDom)
+            todoDiv.appendChild(todoPriorityDom)
+
+        }
+        
+        indivProjectDiv.appendChild(todoButton);
+        
+        //todoButton.addEventListener('click', todoButtonHandler)
+
+
+    return indivProjectDiv
 }
 
 
