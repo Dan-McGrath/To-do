@@ -101,7 +101,7 @@ const createProjectForm = () => {
     const projectTitleInput = document.createElement('input');
     const projectTitleLabel = document.createElement('label');
 
-    projectTitleInput.setAttribute('id', 'title');
+    projectTitleInput.setAttribute('id', 'name');
     projectTitleInput.setAttribute('type', 'text');
     projectTitleInput.setAttribute('name', 'title');
 
