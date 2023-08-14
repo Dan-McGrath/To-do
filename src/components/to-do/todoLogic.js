@@ -3,14 +3,14 @@ import { projectArr } from "../projects/projectsLogic";
 
 const todoObject = {
     name: '',
-    priority: false
+    priority: 'false'
 }
 
 const todoButtonHandler = (e) => {
-    const projectDiv = document.querySelector('.project')
+    const projectsDiv = document.querySelector('.projects')
     if (e.target.dataset.active === 'true') {
         e.target.dataset.active = 'false';  
-        projectDiv.removeChild(projectDiv.lastChild)
+        projectsDiv.removeChild(projectsDiv.lastChild)
         
     } else {
         e.target.dataset.active = 'true'
@@ -22,20 +22,28 @@ const todoFormSubmit = (e) => {
     e.preventDefault();
     let newTodo = document.querySelector('#todo');
     let projectID = document.querySelector('.todo-form').dataset.index;
-    todoObject.name = newTodo.value;
-    //push new todo object to the project array
-    projectArr[Number(projectID)].toDo.push(todoObject);
+    if (newTodo.value === '') {
+        alert('Please fill out info');
+    } else {
+       todoObject.name = newTodo.value;
+        //push new todo object to the project array
+        projectArr[Number(projectID)].toDo.push(todoObject);
 
-    //clear form
-    const todoFormInput = document.querySelector('#todo')
-    todoFormInput.textContent = '';
-    todoFormInput.value = '';
+        //clear form
+        const todoFormInput = document.querySelector('#todo')
+        todoFormInput.textContent = '';
+        todoFormInput.value = '';
 
-    //remove form
-    const project = document.querySelector('.project');
-    const todoButton = document.querySelector('.todo-btn');
-    todoButton.dataset.active = 'false'
-    project.removeChild(project.lastChild)
+        //remove form
+        const project = document.querySelector('.projects');
+        const todoButton = document.querySelector('.todo-btn');
+        todoButton.dataset.active = 'false'
+        //while (project.childNodes.length > 2)  {
+            //project.removeChild(project.lastChild) 
+        //}
+        
+    }
+    
 }
 
 export {todoButtonHandler, todoFormSubmit}
