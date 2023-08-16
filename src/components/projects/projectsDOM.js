@@ -20,12 +20,11 @@ const loadProjectsPage = () => {
         }
         
     }
+    const todoButton = document.querySelectorAll('.todo-btn')
+    todoButton.forEach(ele => ele.addEventListener('click', todoButtonHandler))
 
     content.appendChild(createProject());
-
-    const todoBtn = document.querySelectorAll('.todo-btn');
-    console.log(todoBtn)
-    todoBtn.forEach(e => e.addEventListener('click', todoButtonHandler))
+    console.log(projectArr)
 
 }
 
@@ -61,26 +60,30 @@ const project = (i) => {
 
         indivProjectDiv.appendChild(title);
         indivProjectDiv.appendChild(description);
+
         
+
         for(let j = 0; j < projectArr[i].toDo.length; j++) {
-            const todoDiv = document.createElement('div')
-            const todoName = projectArr[i].toDo[j].name;
-            const todoPriority = projectArr[i].toDo[j].priority;
+
+            const todoDiv = document.createElement('div');
             const todoNameDom = document.createElement('p');
             const todoPriorityDom = document.createElement('div');
+            const todoName = projectArr[i].toDo[j].name;
+            const todoPriority = projectArr[i].toDo[j].priority;
+            
 
             todoNameDom.textContent = todoName;
-            todoPriorityDom.textContent = todoPriority
+            todoPriorityDom.textContent = todoPriority;
 
             indivProjectDiv.appendChild(todoDiv);
-            todoDiv.appendChild(todoNameDom)
-            todoDiv.appendChild(todoPriorityDom)
+            todoDiv.appendChild(todoNameDom);
+            todoDiv.appendChild(todoPriorityDom);
 
         }
         
         indivProjectDiv.appendChild(todoButton);
         
-        //todoButton.addEventListener('click', todoButtonHandler)
+        
 
 
     return indivProjectDiv
@@ -160,7 +163,7 @@ const createProjectForm = () => {
     //submit button
     const submit = document.createElement('button');
     submit.textContent = 'Submit';
-    submit.setAttribute('id', 'submit')
+    submit.setAttribute('class', 'submit')
     projectForm.appendChild(submit);
     submit.addEventListener('click', submitHandler)
     
