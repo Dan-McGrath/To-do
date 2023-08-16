@@ -2,29 +2,28 @@ import { todoForm } from "./todoDOM";
 import { projectArr } from "../projects/projectsLogic";
 import loadProjectsPage from "../projects/projectsDOM";
 
-const todoObject = {
-    name: '',
-}
+
 
 const todoButtonHandler = (e) => {
     const todoBtn = document.querySelectorAll('.todo-btn')
     const projectDiv = e.target.parentNode
-    console.log(projectDiv)
     if (e.target.dataset.active === 'true') {
         todoBtn.forEach(ele => ele.dataset.active = 'false')
-        const todoForm = document.querySelectorAll('.todo-form');
-        todoForm.forEach(ele => ele.remove(ele))
+        const todoFormEle = document.querySelectorAll('.todo-form');
+        todoFormEle.forEach(ele => ele.remove(ele))
 
         
     } else {
-        console.log(e.target.dataset.index)
         if (projectDiv.dataset.index === e.target.dataset.index){
             e.target.dataset.active = 'true';
             projectDiv.appendChild(todoForm())
-            
+            const todoFormID = projectDiv.dataset.index
+            const todoFormEle = document.querySelector('.add-todo-form')
+            todoFormEle.dataset.index = todoFormID
+            const formSubmit = document.querySelectorAll('.submit')
+            formSubmit.forEach(ele => ele.addEventListener('click', todoFormSubmit))
         }
         
-        //todoBtn.forEach(ele => ele.dataset.active = 'true')
         return
         
     }
@@ -32,33 +31,41 @@ const todoButtonHandler = (e) => {
 
 const todoFormSubmit = (e) => {
     e.preventDefault();
+
+    const todoObject = {
+    name: '',
+    }
     let newTodo = e.target.form[0].value;
-    let projectID = Number(e.target.parentNode.dataset.index)
-    if (newTodo.value === '') {
+    let projectID = e.target.parentNode.dataset.index
+    if (newTodo === '') {
         alert('Please fill out info');
     } else {
+        if (e.target.parentNode.dataset.index === projectID) {
+            todoObject.name = newTodo
+            //push new todo object to the project array
+            projectArr[Number(projectID)].toDo.push(todoObject);
+
+            //clear form
+            const todoFormInput = document.querySelectorAll('.todo')
+            todoFormInput.forEach(ele => {
+                ele.textContent = '';
+                ele.value = '';
+            })
+
+            //remove form
+            const content = document.querySelector('#content')
+            while (content.childNodes.length > 1)  {
+                content.removeChild(content.lastChild) 
+            }
         
-        let newTodoObject = todoObject
-        newTodoObject.name = newTodo;
-        //push new todo object to the project array
-        projectArr[Number(projectID)].toDo.push(newTodoObject);
-
-        //clear form
-        const todoFormInput = document.querySelector('#todo')
-        todoFormInput.textContent = '';
-        todoFormInput.value = '';
-
-        //remove form
-        const content = document.querySelector('#content')
-        while (content.childNodes.length > 1)  {
-            content.removeChild(content.lastChild) 
-        }
+        
         
         
         loadProjectsPage()
-        
+        }
         
     }
+        
     
     
 }
