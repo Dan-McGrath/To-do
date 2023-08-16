@@ -24,7 +24,7 @@ const loadProjectsPage = () => {
     todoButton.forEach(ele => ele.addEventListener('click', todoButtonHandler))
 
     content.appendChild(createProject());
-    console.log(projectArr)
+
 
 }
 
@@ -64,10 +64,10 @@ const project = (i) => {
         
 
         for(let j = 0; j < projectArr[i].toDo.length; j++) {
-
             const todoDiv = document.createElement('div');
             const todoNameDom = document.createElement('p');
             const todoPriorityDom = document.createElement('div');
+            todoDiv.classList.add('to-do-' + j);
             const todoName = projectArr[i].toDo[j].name;
             const todoPriority = projectArr[i].toDo[j].priority;
             
