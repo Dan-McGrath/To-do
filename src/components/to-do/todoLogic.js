@@ -31,10 +31,10 @@ const todoButtonHandler = (e) => {
 
 const todoFormSubmit = (e) => {
     e.preventDefault();
-
     const todoObject = {
     name: '',
     }
+    
     let newTodo = e.target.form[0].value;
     let projectID = e.target.parentNode.dataset.index
     if (newTodo === '') {
